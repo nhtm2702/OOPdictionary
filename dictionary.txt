@@ -1,0 +1,7 @@
+apple	tao
+ant	kien
+banana	chuoi
+transport	PTGT
+translate	dich
+transform	TD
+transit	loidi
