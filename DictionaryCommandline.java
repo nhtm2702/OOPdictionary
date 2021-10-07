@@ -33,9 +33,9 @@ public class DictionaryCommandline {
         dictionary.show.insertFromFile();
         dictionary.showAllWords();
         Scanner sc = new Scanner(System.in);
-        String EL = sc.next();
+        String EL = sc.nextLine();
         dictionary.show.dictionaryLookup(EL);
-        EL = sc.next();
+        EL = sc.nextLine();
         dictionary.dictionarySearcher(EL);
     }
 

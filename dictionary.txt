@@ -1,7 +1,14 @@
-apple	tao
-ant	kien
-banana	chuoi
-transport	PTGT
-translate	dich
-transform	TD
-transit	loidi
+pollution
+ô nhiễm
+noise pollution
+ô nhiễm tiếng ồn
+handsome
+đẹp trai
+sit down
+ngồi xuống
+tran ship
+chuyển tàu
+trance
+hôn mê
+tranquil
+yên tĩnh
