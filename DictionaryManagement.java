@@ -18,18 +18,43 @@ public class DictionaryManagement {
 
     public void insertFromFile() throws FileNotFoundException {
         Scanner sc = null;
+        String VN = null;
+        String EL = null;
+        int d = 0;
         try {
-            sc = new Scanner(new BufferedReader(new FileReader("E:\\Dictionary\\src\\dictionary.txt")));
+            sc = new Scanner(new BufferedReader(new FileReader("E:\\Dictionary\\src\\dictionary109K.txt")));
             while (sc.hasNext()) {
-                String EL = sc.nextLine();
-                String VN = sc.nextLine();
-                Word new_word = new Word(EL, VN);
-                manage.dictionary.add(new_word);
+                String in = sc.next();
+                if (in.charAt(0) == '@' && EL == null) {
+                    EL = in.substring(1);
+                }
+                else if (in.charAt(0) == '@' && EL != null) {
+                    Word new_word = new Word(EL, VN);
+                    manage.dictionary.add(new_word);
+                    EL = in.substring(1);
+                    d = 0;
+                }
+                else if (in.charAt(0) == '/') {
+                    VN = in;
+                    d = 1;
+                }
+                else {
+                    if (in.charAt(0) == '*') VN += '\n' + in + " ";
+                    else if (in.charAt(0) == '-' || in.charAt(0) == '=')
+                    {
+                        if (d == 0) EL += ' ' + in;
+                        else VN += '\n' + in;
+                    }
+                    else if (d == 0) EL += " " + in;
+                    else VN += " " + in;
+                }
             }
         } finally {
             if (sc != null) {
                 sc.close();
             }
         }
+        Word new_word = new Word(EL, VN);
+        manage.dictionary.add(new_word);
     }
 }
