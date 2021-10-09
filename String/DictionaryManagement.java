@@ -1,7 +1,9 @@
+package String;
+
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class DictionaryManagement {
@@ -17,44 +19,38 @@ public class DictionaryManagement {
     }
 
     public void insertFromFile() throws FileNotFoundException {
-        Scanner sc = null;
-        String VN = null;
-        String EL = null;
-        int d = 0;
-        try {
-            sc = new Scanner(new BufferedReader(new FileReader("E:\\Dictionary\\src\\dictionary109K.txt")));
-            while (sc.hasNext()) {
-                String in = sc.next();
-                if (in.charAt(0) == '@' && EL == null) {
-                    EL = in.substring(1);
-                }
-                else if (in.charAt(0) == '@' && EL != null) {
-                    Word new_word = new Word(EL, VN);
-                    manage.dictionary.add(new_word);
-                    EL = in.substring(1);
-                    d = 0;
-                }
-                else if (in.charAt(0) == '/') {
-                    VN = in;
-                    d = 1;
-                }
-                else {
-                    if (in.charAt(0) == '*') VN += '\n' + in + " ";
-                    else if (in.charAt(0) == '-' || in.charAt(0) == '=')
-                    {
-                        if (d == 0) EL += ' ' + in;
-                        else VN += '\n' + in;
+        Scanner sc = new Scanner(new BufferedReader(new FileReader("E:\\Dictionary\\src\\dictionary109K.txt")));
+        String in = sc.nextLine();
+        String EL , VN;
+        int d = in.indexOf("/");
+        if (d > 1){
+            EL = in.substring(1,d-1);
+            VN = in.substring(d,in.length());
+        }
+        else {
+            EL = in.substring(1);
+            VN = "";
+        }
+        while (sc.hasNext()) {
+            in = sc.nextLine();
+            if (in.length() >= 1) {
+                if (in.charAt(0) == '@') {
+                    Word word = new Word(EL, VN);
+                    manage.dictionary.add(word);
+                    d = in.indexOf("/");
+                    if (d > 1){
+                        EL = in.substring(1,d-1);
+                        VN = in.substring(d,in.length());
                     }
-                    else if (d == 0) EL += " " + in;
-                    else VN += " " + in;
-                }
-            }
-        } finally {
-            if (sc != null) {
-                sc.close();
+                    else {
+                        EL = in.substring(1);
+                        VN = "";
+                    }
+                } else if (VN.equals("")) VN += in;
+                else if (!VN.equals("")) VN += '\n' + in;
             }
         }
-        Word new_word = new Word(EL, VN);
-        manage.dictionary.add(new_word);
+        Word word = new Word(EL, VN);
+        manage.dictionary.add(word);
     }
 }

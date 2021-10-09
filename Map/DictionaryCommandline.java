@@ -1,3 +1,5 @@
+package Map;
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Set;
@@ -33,9 +35,11 @@ public class DictionaryCommandline {
     public void dictionaryAdvanced() throws FileNotFoundException {
         DictionaryCommandline dictionary = new DictionaryCommandline();
         dictionary.show.insertFromFile();
-        dictionary.showAllWords();
+        //dictionary.showAllWords();
         Scanner sc = new Scanner(System.in);
         String EL = sc.nextLine();
+        TextToSpeech speak = new TextToSpeech();
+        speak.Speech(EL);
         dictionary.show.dictionaryLookup(EL);
         EL = sc.nextLine();
         dictionary.dictionarySearcher(EL);

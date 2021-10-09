@@ -1,3 +1,6 @@
+package String;
+
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
